@@ -1,0 +1,7 @@
+14:34:32 **** Incremental Build of configuration Debug for project RF_ModuleTxRx ****
+make -j12 all 
+arm-none-eabi-size   RF_ModuleTxRx.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14500	    120	   1744	  16364	   3fec	RF_ModuleTxRx.elf
+Finished building: default.size.stdout
+ 
