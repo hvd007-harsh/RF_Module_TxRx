@@ -2,36 +2,27 @@
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200,SERIAL_8N1);
+  Serial.begin(115200);
 
 }
 
 void loop() {
 while (! Serial.available());
 if(Serial.available()){
-uint8_t * datarcv  = (uint8_t*) Serial.read();
-if(sizeof(datarcv) != 0){
-unsigned char temp[1000]; 
- int j = 0;
- int count =0;
- for(int i = 0; i <sizeof(datarcv); i++){
-   
-      while(datarcv[j+count] != 0xD3 && datarcv[j+1+count] != 0x00 && datarcv[j+2+count] != 0x13 && datarcv[j+3+count] != 0x3E){
-    
-          if(datarcv[j] == 0xD3 && datarcv[j+1] == 0x00 && datarcv[j+2] == 0x13 && datarcv[j+3] == 0x3E){
-     
-             if(sizeof(temp)!=0){
-                 delay(1000);
-                 count= j;
-                 j=0;
-             }
 
-          }
-      Serial.print(datarcv[j]); 
-      j++;
-   }
- 
-  }
+  // We have to store the value into hex 
+//unsigned char datarcv  =Serial.read();
+//We have to store the incoming data into the array of data. 
+char rcvData[100];
+Serial.readBytes(rcvData,100); 
+
+for(int i =0 ; i < sizeof(rcvData) ; i++){
+    if( (rcvData[i] == 0xD3 ) && (rcvData[i+1]== 0x00) && (rcvData[i+2] == 0x13) && (rcvData[i+3] == 0x3E)){
+      Serial.print("\n");
+    }
+    Serial.print(rcvData[i],HEX); 
 }
+
 }
+
 }
